@@ -1,0 +1,42 @@
+<app-loading-indicator *ngIf="loading"></app-loading-indicator>
+
+<div *ngIf="!loading">
+
+  <nav class="navbar navbar-light bg-dark">
+    <a class="navbar-brand" href="#">
+      <!-- <img src="/docs/4.0/assets/brand/bootstrap-solid.svg" width="30" height="30" alt=""> -->
+      <h3 style="color: white;">Trackm8</h3>
+    </a>
+    <h3 class="form-inline" style="color: white;" (click)="showHowWorks ? showHowWorks = false : showHowWorks = true">
+      How does it work?
+    </h3>
+  </nav>
+
+  <div *ngIf="!showHowWorks">
+
+    <app-table *ngIf="!showAddForm" [data]="data" (addItem)="showAddForm = true"></app-table>
+
+    <app-add-form *ngIf="showAddForm" (addItem)="addNewItem($event)" (cancelItem)="showAddForm = false"></app-add-form>
+
+  </div>
+
+  <div *ngIf="showHowWorks" class="container">
+
+    <h3 class="text-center">How does it work?</h3>
+    <ol>
+      <li>Get the data from the API using the APIService I created (I'm getting data from a mock API that I hosted, this
+        project is using a proxy as I was getting errors trying to get the data)</li>
+      <li>Once the data has been received and stored, the loading screen dissapears and the table is populated with data
+      </li>
+      <li>The table data is organised using the a pipe that i found online
+        (https://stackblitz.com/edit/angular-uzzqda?file=app)</li>
+      <li>When the delete button is clicked on an item, that item is selected in the array and then deleted (spliced)
+      </li>
+      <li>When the add button is clicked, that user enters the data they want, once it's submitted, validation checks
+        are carried out, once its validated it gets pushed into the array</li>
+        <li>This project is hosted in an S3 bucket with the URL: </li>
+    </ol>
+    <p class="text-center">By Joshua Chumber</p>
+  </div>
+
+</div>
